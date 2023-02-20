@@ -10,13 +10,23 @@ import {
   IVideoSelectorContext,
 } from "../contexts/VideoSelectorContext";
 
+const filesTemp: IFile[] = [
+  {
+    id: "1",
+    fileName: "file_1",
+  },
+  {
+    id: "2",
+    fileName: "file_2",
+  },
+];
+
 interface IFile {
   id: string;
   fileName: string;
 }
 
 function VideoSelector() {
-  const [file, setFile] = useState("");
   const [files, setFiles] = useState<IFile[]>([]);
   const { changeVideoId } =
     useContext<IVideoSelectorContext>(VideoSelectorContext);
@@ -27,14 +37,15 @@ function VideoSelector() {
   };
 
   useEffect(() => {
-    axios.get<IFile[]>("http://localhost:5000/files").then((response) => {
-      setFiles(
-        response.data.map((data: any) => ({
-          id: data.id,
-          fileName: data.filename,
-        }))
-      );
-    });
+    // axios.get<IFile[]>("http://localhost:5000/files").then((response) => {
+    //   setFiles(
+    //     response.data.map((data: any) => ({
+    //       id: data.id,
+    //       fileName: data.filename,
+    //     }))
+    //   );
+    // });
+    setFiles(filesTemp);
   }, []);
 
   return (
