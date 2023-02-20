@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 30vh;
+  width: 30vh;
+  margin: 30px;
+}
+
+.videoSelectForm {
+}
+
+.videoSelect {
+  width: 20vh;
+  background: #fdfefe;
+}
