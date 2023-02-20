@@ -16,7 +16,8 @@ export function VideoPlay({
   skipPreviousDisabled = false,
   skipNextDisabled = false,
 }: IVideoPlayComponentProps) {
-  const { playing, togglePlaying } = useContext<IPlayerContext>(PlayerContext);
+  const { clickedPlay, togglePlaying } =
+    useContext<IPlayerContext>(PlayerContext);
 
   return (
     <Stack
@@ -32,7 +33,7 @@ export function VideoPlay({
         <SkipPreviousIcon />
       </IconButton>
       <IconButton onClick={() => togglePlaying?.()}>
-        {playing ? <PauseIcon /> : <PlayArrowIcon />}
+        {clickedPlay ? <PauseIcon /> : <PlayArrowIcon />}
       </IconButton>
       <IconButton disabled={skipNextDisabled}>
         <SkipNextIcon />

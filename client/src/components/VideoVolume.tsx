@@ -23,6 +23,7 @@ export function VideoVolume() {
         min={0}
         max={1}
         step={0.01}
+        defaultValue={0.2}
         aria-label="Volume"
         onChange={changeVolume}
       />

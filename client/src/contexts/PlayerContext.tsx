@@ -1,12 +1,12 @@
 import { createContext } from "react";
 
 export interface IPlayerContext {
-  playing: boolean;
+  clickedPlay: boolean;
   togglePlaying?: () => void;
 }
 
 const defaultState = {
-  playing: false,
+  clickedPlay: false,
 };
 
 export const PlayerContext = createContext<IPlayerContext>(defaultState);

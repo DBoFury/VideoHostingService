@@ -16,13 +16,12 @@ interface IFile {
 }
 
 function VideoSelector() {
-  const [file, setFile] = useState("");
   const [files, setFiles] = useState<IFile[]>([]);
   const { changeVideoId } =
     useContext<IVideoSelectorContext>(VideoSelectorContext);
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
+    console.log(files);
     changeVideoId?.(event);
   };
 
@@ -30,7 +29,7 @@ function VideoSelector() {
     axios.get<IFile[]>("http://localhost:5000/files").then((response) => {
       setFiles(
         response.data.map((data: any) => ({
-          id: data.id,
+          id: data._id,
           fileName: data.filename,
         }))
       );

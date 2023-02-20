@@ -12,16 +12,15 @@ import { VideoSelectorContext } from "../contexts/VideoSelectorContext";
 
 function App() {
   const [videoId, setVideoId] = useState("");
-  const [playing, setPlaying] = useState(false);
+  const [clickedPlay, setClickedPlay] = useState(false);
   const volume = useRef(0.2);
 
   const changeVideoId = (event: SelectChangeEvent) => {
-    console.log(event.target);
     setVideoId(event.target.value as string);
   };
 
   const togglePlaying = () => {
-    setPlaying(!playing);
+    setClickedPlay(!clickedPlay);
   };
 
   const changeVolume = (event: Event, value: number | number[]) => {
@@ -31,11 +30,11 @@ function App() {
   return (
     <div className={styles.container}>
       <ReactPlayer
-        className="react-player"
+        className={styles.reactPlayer}
         url={`http://localhost:5000/${
           videoId === "" ? "initial_file" : "file/" + videoId
         }`}
-        playing={playing}
+        playing={clickedPlay}
         volume={volume.current}
       />
       <Card className={styles.card} sx={{ backgroundColor: "#A8D0E7" }}>
@@ -49,7 +48,7 @@ function App() {
 
         <PlayerContext.Provider
           value={{
-            playing: playing,
+            clickedPlay: clickedPlay,
             togglePlaying: togglePlaying,
           }}
         >
@@ -62,6 +61,13 @@ function App() {
         >
           <VideoVolume />
         </VolumeContext.Provider>
+        {/* <SpeedContext.Provider
+          value={{
+            changeSpeed: changeSpeed,
+          }}
+        >
+          <VideoSpeed />
+        </SpeedContext.Provider> */}
       </Card>
     </div>
   );
