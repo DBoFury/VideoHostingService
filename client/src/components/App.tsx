@@ -3,6 +3,9 @@ import styles from "../styles/App.module.css";
 import ReactPlayer from "react-player";
 import Card from "@mui/material/Card";
 import VideoSelector from "./VideoSelector";
+import useWindowDimensions from "../hooks/useWindowDimensions";
+import { VideoSpeed } from "./VideoSpeed";
+import { SpeedContext } from "../contexts/SpeedContext";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { VideoPlay } from "./VideoPlay";
 import { VideoVolume } from "./VideoVolume";
@@ -11,8 +14,10 @@ import { VolumeContext } from "../contexts/VolumeContext";
 import { VideoSelectorContext } from "../contexts/VideoSelectorContext";
 
 function App() {
-  const [videoId, setVideoId] = useState("");
-  const [clickedPlay, setClickedPlay] = useState(false);
+  const [videoId, setVideoId] = useState<string>("");
+  const [clickedPlay, setClickedPlay] = useState<boolean>(false);
+  const [videoSpeed, setVideoSpeed] = useState<number>(1);
+  const { width, height } = useWindowDimensions();
   const volume = useRef(0.2);
 
   const changeVideoId = (event: SelectChangeEvent) => {
@@ -27,15 +32,21 @@ function App() {
     volume.current = value as number;
   };
 
+  const changeSpeed = (event: Event, value: number | number[]) => {
+    setVideoSpeed(value as number);
+  };
+
   return (
     <div className={styles.container}>
       <ReactPlayer
-        className={styles.reactPlayer}
         url={`http://localhost:5000/${
           videoId === "" ? "initial_file" : "file/" + videoId
         }`}
         playing={clickedPlay}
         volume={volume.current}
+        playbackRate={videoSpeed}
+        width={width > 860 ? width / 2 : width - 20}
+        height={height / 2}
       />
       <Card className={styles.card} sx={{ backgroundColor: "#A8D0E7" }}>
         <VideoSelectorContext.Provider
@@ -61,13 +72,14 @@ function App() {
         >
           <VideoVolume />
         </VolumeContext.Provider>
-        {/* <SpeedContext.Provider
+        <SpeedContext.Provider
           value={{
+            videoSpeed: videoSpeed,
             changeSpeed: changeSpeed,
           }}
         >
           <VideoSpeed />
-        </SpeedContext.Provider> */}
+        </SpeedContext.Provider>
       </Card>
     </div>
   );

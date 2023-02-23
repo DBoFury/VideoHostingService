@@ -16,6 +16,7 @@ export function VideoVolume() {
       spacing={2}
       sx={{
         width: "20vh",
+        minWidth: "140px",
       }}
     >
       <VolumeDown />

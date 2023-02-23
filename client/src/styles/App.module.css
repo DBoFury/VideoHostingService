@@ -13,9 +13,31 @@
   height: 30vh;
   width: 30vw;
   margin: 30px;
+  max-width: 400px;
 }
 
 .videoSelect {
   width: 20vw;
   background: #fdfefe;
+  max-width: 200px;
+}
+
+@media (max-width: 860px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 50vw;
+  }
+
+  .videoSelect {
+    width: 30vw;
+  }
+}
+
+@media (max-height: 600px) {
+  .card {
+    height: 400px;
+  }
 }

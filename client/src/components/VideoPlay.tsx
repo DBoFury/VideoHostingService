@@ -24,7 +24,7 @@ export function VideoPlay({
       direction="row"
       justifyContent="center"
       alignItems="center"
-      spacing={2}
+      spacing={1}
       sx={{
         width: "20vh",
       }}

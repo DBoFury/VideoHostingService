@@ -21,7 +21,6 @@ function VideoSelector() {
     useContext<IVideoSelectorContext>(VideoSelectorContext);
 
   const handleChange = (event: SelectChangeEvent) => {
-    console.log(files);
     changeVideoId?.(event);
   };
 
